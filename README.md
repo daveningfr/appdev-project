@@ -1,2 +1,8 @@
 # appdev-project
-backend -daven
+
+grp memebers
+shixu
+ethan
+zamirul
+alfredo 
+daven
