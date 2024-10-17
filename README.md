@@ -1,8 +1,8 @@
 # appdev-project
 
-grp memebers
-shixu
-ethan
-zamirul
-alfredo 
-daven
+grp memebers\
+shixu\
+ethan\
+zamirul\
+alfredo \
+daven\
