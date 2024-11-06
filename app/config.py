@@ -1,5 +1,9 @@
+# app/config.py
+
+import os
+
 class Config:
-    MYSQL_HOST = '116.86.77.68:3306'
-    MYSQL_USER = 'daven'
-    MYSQL_PASSWORD = '03D@ven11'
-    MYSQL_DB = 'appdev'
+    # Database configuration - SQLite
+    SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://daven:03D%40ven11@116.86.77.68:3306/appdev'
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
+1
