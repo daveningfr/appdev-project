@@ -1,16 +1,9 @@
-from flask import Flask, render_template, request, redirect, url_for, flash
-import pymysql
-from app.config import Config  # If configurations are in a separate file
+from app import app, db
 
-app = Flask(__name__)
-app.config.from_object(Config)
-
-# Initialize a connection function
-# def get_db_connection():
-#     return pymysql.connect(
-#         host=app.config['MYSQL_HOST'],
-#         user=app.config['MYSQL_USER'],
-#         password=app.config['MYSQL_PASSWORD'],
-#         database=app.config['MYSQL_DB'],
-#         cursorclass=pymysql.cursors.DictCursor  # For dictionary-like rows
-#     )
+if __name__ == '__main__':
+    # Create tables within the app context
+    with app.app_context():
+        db.create_all()
+    
+    # Run the app
+    app.run(debug=True)
