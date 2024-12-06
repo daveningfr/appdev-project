@@ -11,7 +11,7 @@ def index():
 def about():
     return render_template('about.html')
 
-@app.route('/signup')
+@app.route('/signup', methods=['GET', 'POST'])
 def signup():
-    fein = SignUp(request.form)
-    return render_template('signup.html', form=fein)
+    signup = SignUp(request.form)
+    return render_template('signup.html', form=signup)
