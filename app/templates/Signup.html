@@ -1,10 +1,10 @@
 {% extends "base.html" %}
 
 {% block content %}
-{% from "_formHelper.html" import render_field %}
+{% from "includes/_formHelper.html" import render_field %}
+{{ display_flashes(get_flashed_messages(with_categories=true)) }}
     <h1>Sign Up</h1>
     <form action="{{url_for('signup')}}" method="POST">
-
         <div class="form-group">
             {{ render_field(form.username, class="form-control") }}
         </div>
