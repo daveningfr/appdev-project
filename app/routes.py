@@ -20,25 +20,24 @@ def about():
 
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
+    form = SignUp(request.form)
     if 'userid' in session:
-        flash('You are already logged in','success')
+        flash('You are already logged in', 'success')
         return redirect(url_for('dashboard'))
 
-    if request.method == 'GET':
-        fein = SignUp(request.form) # Create a form object
-        return render_template('signup.html', form=fein)
-    elif request.method == 'POST':
-        username = request.form.get('username')
-        email = request.form.get('email')
-        password = request.form.get('password')
+    if request.method == 'POST' and form.validate():
+        username = form.username.data
+        email = form.email.data
+        password = form.password.data
 
         # Check if user or email already exists
         if User.query.filter_by(email=email).first():
-            flash('Email already exists.','error')
+            flash('Email already exists.', 'error')
             return redirect(url_for('signup'))
         if User.query.filter_by(username=username).first():
-            flash('Username already exists.','error')
+            flash('Username already exists.', 'error')
             return redirect(url_for('signup'))
+
         # Save user with hashed password
         new_user = User(username=username, email=email)
         new_user.set_password(password)  # Hash the password
@@ -47,6 +46,8 @@ def signup():
 
         flash('User registered successfully! You may now log in', 'success')
         return redirect(url_for('login'))
+
+    return render_template('signup.html', form=form)
 
 
 
