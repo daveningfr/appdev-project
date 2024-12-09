@@ -6,7 +6,7 @@ from app.form import SignUp, Login
 @app.route('/debug-session') #for debug purposes delete when in production
 def debug_session():
     print(f"Current session data: {session}")
-    return 'Check your terminal'
+    return f'Current session data: {session}'
 
 
 
@@ -20,9 +20,9 @@ def about():
 
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
-    if 'user_id' in session:
+    if 'userid' in session:
         flash('You are already logged in','success')
-        return redirect(url_for('index'))
+        return redirect(url_for('dashboard'))
 
     if request.method == 'GET':
         fein = SignUp(request.form) # Create a form object
@@ -52,9 +52,9 @@ def signup():
 
 @app.route('/login',methods=['GET','POST'])
 def login():
-    if 'user_id' in session:
+    if 'userid' in session:
         flash('You are already logged in','success')
-        return redirect(url_for('index'))
+        return redirect(url_for('dashboard'))
     if request.method == 'GET':
         fein =  Login(request.form)
         return render_template('login.html',form=fein)
@@ -64,10 +64,9 @@ def login():
         user = User.query.filter_by(username=username).first()
 
         if user and user.check_password(password):
-            session['user_id'] = user.id
-            session['username'] = user.username
-            flash('Login successful!','success')
-            return redirect(url_for('index'))
+            session['userid'] = user.id
+            flash('Logged in successfully!', 'success')
+            return redirect(url_for('dashboard'))
         
         elif user:
             flash('Invalid password','error')
@@ -85,3 +84,12 @@ def logout():
     session.clear()
     flash('You have been logged out','success')
     return redirect(url_for('login'))
+
+@app.route('/dashboard')
+def dashboard():
+    if 'userid' not in session:
+        flash('You need to login first','error')
+        return redirect(url_for('login'))
+    user =User.query.filter_by(id=session['userid']).first()
+
+    return render_template('dashboard.html',user=user)

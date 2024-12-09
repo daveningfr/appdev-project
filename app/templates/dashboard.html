@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="dashboard">
+    <h1>Dashboard</h1>
+    {{ display_flashes(get_flashed_messages(with_categories=true)) }}
+    <p>Welcome to your dashboard!</p>
+    
+    <!-- Add your dashboard content here -->
+    {% if user %}
+        <p>Username: {{ user.username }}</p>
+        <p>Email: {{ user.email }}</p>
+        <p><a href="{{ url_for('logout') }}">Logout</a></p>
+    {% else %}
+        <p>Please log in to see your information.</p>
+    {% endif %}
+    <p><a href="{{url_for('index')}}">home</a></p>
+</div>
+{% endblock %}
