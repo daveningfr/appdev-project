@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
+{{ display_flashes(get_flashed_messages(with_categories=true)) }}lp
     <h1>Welcome to My Flask App!</h1>
     <p>Click <a href="/about">here</a> to learn more about us.</p>
     <p><a href="{{url_for('signup')}}">signup</a></p>

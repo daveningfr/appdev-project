@@ -1,4 +1,4 @@
-import os
+from datetime import timedelta
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 WTF_CSRF_ENABLED = True
@@ -17,5 +17,7 @@ app = Flask(__name__)
 # Configuration of the database
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'  
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(minutes=30)
+app.config['SECRET_KEY'] = 'veryverysecretkey'
 
 db = SQLAlchemy(app)
