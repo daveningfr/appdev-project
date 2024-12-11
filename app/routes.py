@@ -39,7 +39,7 @@ def signup():
             return redirect(url_for('signup'))
 
         # Save user with hashed password
-        new_user = User(username=username, email=email)
+        new_user = User(username=username, email=email,green_points=0)
         new_user.set_password(password)  # Hash the password
         db.session.add(new_user)
         db.session.commit()

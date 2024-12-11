@@ -10,6 +10,7 @@
     {% if user %}
         <p>Username: {{ user.username }}</p>
         <p>Email: {{ user.email }}</p>
+        <p>Green Points: {{ user.green_points }}</p>
         <p><a href="{{ url_for('logout') }}">Logout</a></p>
     {% else %}
         <p>Please log in to see your information.</p>
