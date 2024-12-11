@@ -2,6 +2,7 @@ from app import app, db
 from flask import render_template ,request ,flash ,redirect ,url_for,session
 from app.models import User
 from app.form import SignUp, Login
+from datetime import timedelta
 
 @app.route('/debug-session') #for debug purposes delete when in production
 def debug_session():
@@ -9,6 +10,10 @@ def debug_session():
     return f'Current session data: {session}'
 
 
+@app.before_request
+def make_session_permanent():
+    session.permanent = True
+    app.permanent_session_lifetime = timedelta(minutes=30)
 
 @app.route('/')
 def index():
