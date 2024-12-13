@@ -4,7 +4,7 @@ from app.models import User
 from app.form import SignUp, Login
 from datetime import timedelta
 
-@app.route('/debug-session') #for debug purposes delete when in production
+@app.route('/debug-session') #
 def debug_session():
     print(f"Current session data: {session}")
     return f'Current session data: {session}'
